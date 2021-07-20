@@ -1,33 +1,79 @@
 package com.crud.library.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "RENTED")
 public class Rented {
+
+    private int id;
+    private Copies copy;
+    private Member member;
+    private LocalDate rented;
+    private LocalDate returned;
+
+    public Rented() {}
+
+    public Rented(int id, Copies copy, Member member, LocalDate rented) {
+        this.id = id;
+        this.copy = copy;
+        this.member = member;
+        this.rented = rented;
+    }
+
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "COPY_ID", unique = true)
-    private int idCopy;
-    @Column(name = "MEMBER_ID")
-    private int idMember;
-    @Column(name = "RENTED_DATE")
-    private LocalDate rented;
-    @Column(name = "RETURNED_DATE")
-    private LocalDate returned;
+    @Column(name = "ID", unique = true)
+    public int getId() {
+        return id;
+    }
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "COPY_ID")
+    public Copies getCopy() {
+        return copy;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    public Member getMember() {
+        return member;
+    }
+
+    @Column(name = "RENTED")
+    public LocalDate getRented() {
+        return rented;
+    }
+
+    @Column(name = "RETURNED")
+    public LocalDate getReturned() {
+        return returned;
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    private void setCopy(Copies copy) {
+        this.copy = copy;
+    }
+
+    private void setMember(Member member) {
+        this.member = member;
+    }
+
+    private void setRented(LocalDate rented) {
+        this.rented = rented;
+    }
+
+    public void setReturned(LocalDate returned) {
+        this.returned = returned;
+    }
 }
