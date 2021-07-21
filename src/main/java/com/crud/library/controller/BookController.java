@@ -23,9 +23,33 @@ public class BookController {
         booksDbService.saveBook(book);
     }
 
+    @PutMapping(value = "updateBook")
+    public BookDto updateBook(@RequestBody BookDto bookDto) {
+        Book book = bookMapper.mapBookDtoToBook(bookDto);
+        Book savedBook = booksDbService.saveBook(book);
+        return bookMapper.mapBookToBookDto(savedBook);
+    }
+
     @GetMapping(value = "getBooks")
     public List<BookDto> getBooks() {
         List<Book> books = booksDbService.getBooks();
         return bookMapper.mapToBookDtoList(books);
+    }
+
+    @GetMapping(value = "getBookByAuthor")
+    public List<BookDto> getBookByAuthor(@RequestParam String author) {
+        List<Book> booksByAuthor = booksDbService.getBookByAuthor(author);
+        return bookMapper.mapToBookDtoList(booksByAuthor);
+    }
+
+    @GetMapping(value = "getBookByTitle")
+    public List<BookDto> getBookByTitle(@RequestParam String title) {
+        List<Book> booksByTitle = booksDbService.getBookByTitle(title);
+        return bookMapper.mapToBookDtoList(booksByTitle);
+    }
+
+    @DeleteMapping(value = "deleteBookById")
+    public void deleteBookById(@RequestParam int bookId) {
+        booksDbService.deleteBook(bookId);
     }
 }

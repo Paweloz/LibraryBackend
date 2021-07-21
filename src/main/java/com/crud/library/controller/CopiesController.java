@@ -1,7 +1,10 @@
 package com.crud.library.controller;
 
+import com.crud.library.domain.Book;
+import com.crud.library.domain.BookDto;
 import com.crud.library.domain.Copies;
 import com.crud.library.domain.CopiesDto;
+import com.crud.library.mapper.BookMapper;
 import com.crud.library.mapper.CopiesMapper;
 import com.crud.library.service.CopiesDbService;
 import lombok.RequiredArgsConstructor;
@@ -11,15 +14,17 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "v1/copies")
+@RequestMapping(path = "v1/library/copies")
 public class CopiesController {
     private final CopiesDbService copiesDbService;
     private final CopiesMapper copiesMapper;
+    private final BookMapper bookMapper;
 
     @PostMapping(value = "createCopy")
-    public void createCopy(@RequestBody CopiesDto copiesDto) {
+    public CopiesDto createCopy(@RequestBody CopiesDto copiesDto) {
         Copies copies = copiesMapper.mapCopiesDtoToCopies(copiesDto);
-        copiesDbService.saveCopy(copies);
+        Copies savedCopy = copiesDbService.saveCopy(copies);
+        return copiesMapper.mapCopiesToCopiesDto(savedCopy);
     }
 
     @PutMapping(value = "changeStatus")
@@ -29,8 +34,26 @@ public class CopiesController {
         return copiesMapper.mapCopiesToCopiesDto(savedCopy);
     }
 
-    @GetMapping(value = "getCopiesAvaliable")
-    public List<Copies> getCopiesAvaliable() {
-        return copiesDbService.getAvaliable();
+    @GetMapping(value = "getCopiesByBook")
+    public List<CopiesDto> getCopiesByBook(@RequestBody BookDto bookDto) {
+        Book bookToGet = bookMapper.mapBookDtoToBook(bookDto);
+        return copiesMapper.mapToCopiesDtoList(copiesDbService.getCopiesByBook(bookToGet));
     }
+
+    @GetMapping(value = "getAllCopies")
+    public List<CopiesDto> getAllCopies() {
+        return copiesMapper.mapToCopiesDtoList(copiesDbService.getAllCopies());
+    }
+
+    @GetMapping(value = "getCopiesAvaliable")
+    public List<CopiesDto> getCopiesAvaliable() {
+        return copiesMapper.mapToCopiesDtoList(copiesDbService.getAvaliable());
+    }
+
+    @DeleteMapping(value = "deleteCopy")
+    public void deleteCopy(@RequestParam int copyId) {
+        copiesDbService.deleteCopy(copyId);
+    }
+
+
 }

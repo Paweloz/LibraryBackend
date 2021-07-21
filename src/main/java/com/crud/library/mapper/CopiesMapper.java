@@ -26,8 +26,8 @@ public class CopiesMapper {
         );
     }
 
-    public List<CopiesDto> mapToTaskDtoList(final List<Copies> taskList) {
-        return taskList.stream()
+    public List<CopiesDto> mapToCopiesDtoList(final List<Copies> copiesList) {
+        return copiesList.stream()
                 .map(this::mapCopiesToCopiesDto)
                 .collect(Collectors.toList());
     }

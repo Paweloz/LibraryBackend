@@ -8,23 +8,40 @@ import com.crud.library.service.RentalDbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "v1/rental")
+@RequestMapping(path = "v1/library/rental")
 public class RentalController {
     private final RentalDbService rentalDbService;
     private final RentedMapper rentedMapper;
 
     @PostMapping(value = "rentBook")
-    public void rentBook(@RequestBody RentedDto rentedDto) {
+    public RentedDto rentBook(@RequestBody RentedDto rentedDto) {
         Rented rented = rentedMapper.mapRentedDtoToRented(rentedDto);
-        rentalDbService.saveRental(rented);
+        Rented savedRented = rentalDbService.saveRental(rented);
+        return rentedMapper.mapRentedToRentedDto(savedRented);
+    }
+
+    @GetMapping(value = "getRented")
+    public List<RentedDto> getRented() {
+        List<Rented> rentedList = rentalDbService.getRented();
+        return rentedMapper.mapToRentedDtoList(rentedList);
+    }
+
+    @GetMapping(value = "getRentedByMemberLastname")
+    public List<RentedDto> getRentedByMemberLastname(@RequestParam String lastname) {
+        List<Rented> rentedList = rentalDbService.getRentedByMemberLastname(lastname);
+        return rentedMapper.mapToRentedDtoList(rentedList);
     }
 
     @DeleteMapping(value = "returnBook")
-    public void returnBook(@RequestParam int rentId) throws NoSuchRentalException {
-        Rented savedRented = rentalDbService.getRental(rentId).orElseThrow(NoSuchRentalException::new);
-        savedRented.getCopy().setStatus("AVALIABLE");
-        rentalDbService.deleteRental(rentId);
+    public void returnBook(@RequestParam int rentId) {
+        try {
+            rentalDbService.deleteRental(rentId);
+        } catch (NoSuchRentalException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

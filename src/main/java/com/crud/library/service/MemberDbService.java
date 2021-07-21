@@ -11,10 +11,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberDbService {
     private final MemberDao memberDao;
+
     public List<Member> getMembers() {
         return memberDao.findAll();
     }
+    public List<Member> getMemberByLastName(final String lastname) {
+        return memberDao.getMemberByLastName(lastname);
+    }
     public Member saveMember(final Member member) {
         return memberDao.save(member);
+    }
+    public void deleteMemeber(final int memberId) {
+        memberDao.deleteById(memberId);
     }
 }

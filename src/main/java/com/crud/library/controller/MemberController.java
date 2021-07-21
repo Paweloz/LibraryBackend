@@ -11,20 +11,40 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "v1/member")
+@RequestMapping(path = "v1/library/member")
 public class MemberController {
     private final MemberDbService memberDbService;
     private final MemberMapper memberMapper;
 
     @PostMapping(value = "createMember")
-    public void createMember(@RequestBody MemberDto memberDto) {
+    public MemberDto createMember(@RequestBody MemberDto memberDto) {
         Member member = memberMapper.mapMemberDtoToMember(memberDto);
-        memberDbService.saveMember(member);
+        Member savedMember = memberDbService.saveMember(member);
+        return memberMapper.mapMemberToMemberDto(savedMember);
+
+    }
+
+    @PutMapping(value = "updateMember")
+    public MemberDto updateMember(@RequestBody MemberDto memberDto) {
+        Member member = memberMapper.mapMemberDtoToMember(memberDto);
+        Member savedMember = memberDbService.saveMember(member);
+        return memberMapper.mapMemberToMemberDto(savedMember);
     }
 
     @GetMapping(value = "getMembers")
     public List<MemberDto> getMembers() {
         List<Member> memberList = memberDbService.getMembers();
         return memberMapper.mapToMemberDtoList(memberList);
+    }
+
+    @GetMapping(value = "getMemberByLastname")
+    public List<MemberDto> getMemberByLastname(@RequestParam String lastname) {
+        List<Member> memberList = memberDbService.getMemberByLastName(lastname);
+        return memberMapper.mapToMemberDtoList(memberList);
+    }
+
+    @DeleteMapping(value = "deleteMember")
+    public void deleteMember(@RequestParam int memberId) {
+        memberDbService.deleteMemeber(memberId);
     }
 }

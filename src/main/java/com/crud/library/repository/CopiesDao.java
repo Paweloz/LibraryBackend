@@ -13,9 +13,8 @@ import java.util.List;
 @Repository
 @Transactional
 public interface CopiesDao extends CrudRepository<Copies, Integer> {
-
+    List<Copies> findAll();
     List<Copies> findCopiesByBook(Book book);
-
     @Query
     List<Copies> getAvaliable(@Param("AVALIABLE") String avaliable);
 }
