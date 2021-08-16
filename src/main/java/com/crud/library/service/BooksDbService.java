@@ -24,7 +24,7 @@ public class BooksDbService {
     public Book saveBook(final Book book) {
         return bookDao.save(book);
     }
-    public void deleteBook(final int bookId) {
+    public void deleteBook(final Long bookId) {
         bookDao.deleteById(bookId);
     }
 }

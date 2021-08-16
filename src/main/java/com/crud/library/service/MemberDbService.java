@@ -21,7 +21,7 @@ public class MemberDbService {
     public Member saveMember(final Member member) {
         return memberDao.save(member);
     }
-    public void deleteMemeber(final int memberId) {
+    public void deleteMemeber(final Long memberId) {
         memberDao.deleteById(memberId);
     }
 }

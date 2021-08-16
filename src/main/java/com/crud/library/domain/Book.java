@@ -1,5 +1,8 @@
 package com.crud.library.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -7,28 +10,21 @@ import java.util.List;
 
 @Entity
 @Table(name = "BOOK")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
 
-    private int id;
+    private Long id;
     private String title;
     private String author;
     private int publicationYear;
     private List<Copies> copiesList = new ArrayList<>();
 
-    public Book(){}
-
-    public Book(int id, String title, String author, int publicationYear) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
-    }
-
     @Id
     @NotNull
     @GeneratedValue
     @Column(name = "ID", unique = true)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -56,7 +52,7 @@ public class Book {
         return copiesList;
     }
 
-    private void setId(int id) {
+    private void setId(Long id) {
         this.id = id;
     }
 

@@ -23,5 +23,5 @@ public class CopiesDbService {
     public Copies saveCopy(final Copies copies) {
         return copiesDao.save(copies);
     }
-    public void deleteCopy(final int copyId) { copiesDao.deleteById(copyId);}
+    public void deleteCopy(final Long copyId) { copiesDao.deleteById(copyId);}
 }

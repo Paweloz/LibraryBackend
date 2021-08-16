@@ -51,7 +51,7 @@ public class CopiesController {
     }
 
     @DeleteMapping(value = "deleteCopy")
-    public void deleteCopy(@RequestParam int copyId) {
+    public void deleteCopy(@RequestParam Long copyId) {
         copiesDbService.deleteCopy(copyId);
     }
 

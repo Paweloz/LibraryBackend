@@ -37,7 +37,7 @@ public class RentalController {
     }
 
     @DeleteMapping(value = "returnBook")
-    public void returnBook(@RequestParam int rentId) {
+    public void returnBook(@RequestParam Long rentId) {
         try {
             rentalDbService.deleteRental(rentId);
         } catch (NoSuchRentalException e) {

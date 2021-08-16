@@ -8,8 +8,8 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 public class RentedDto {
-    private int id;
-    private Copies copy;
-    private Member member;
+    private Long id;
+    private CopiesDto copyDto;
+    private MemberDto memberDto;
     private LocalDate rented;
 }

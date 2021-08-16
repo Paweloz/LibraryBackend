@@ -18,9 +18,9 @@ public class BookController {
     private final BookMapper bookMapper;
 
     @PostMapping(value = "createTitle")
-    public void createTitle(@RequestBody BookDto bookDto) {
+    public BookDto createTitle(@RequestBody BookDto bookDto) {
         Book book = bookMapper.mapBookDtoToBook(bookDto);
-        booksDbService.saveBook(book);
+        return bookMapper.mapBookToBookDto(booksDbService.saveBook(book)) ;
     }
 
     @PutMapping(value = "updateBook")
@@ -49,7 +49,7 @@ public class BookController {
     }
 
     @DeleteMapping(value = "deleteBookById")
-    public void deleteBookById(@RequestParam int bookId) {
+    public void deleteBookById(@RequestParam Long bookId) {
         booksDbService.deleteBook(bookId);
     }
 }

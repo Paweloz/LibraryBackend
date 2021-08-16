@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "MEMBER")
 public class Member {
 
-    private int id;
+    private Long id;
     private String name;
     private String lastName;
     private LocalDate accountCreationDate;
@@ -18,7 +18,7 @@ public class Member {
 
     public Member() {}
 
-    public Member(int id, String name, String lastName, LocalDate accountCreationDate) {
+    public Member(Long id, String name, String lastName, LocalDate accountCreationDate) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -29,7 +29,7 @@ public class Member {
     @NotNull
     @GeneratedValue
     @Column(name = "ID", unique = true)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -58,7 +58,7 @@ public class Member {
         return rentedBooks;
     }
 
-    private void setId(int id) {
+    private void setId(Long id) {
         this.id = id;
     }
 

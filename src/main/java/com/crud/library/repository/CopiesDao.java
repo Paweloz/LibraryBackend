@@ -9,12 +9,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
 public interface CopiesDao extends CrudRepository<Copies, Integer> {
     List<Copies> findAll();
     List<Copies> findCopiesByBook(Book book);
+    Optional<Copies> findById(Long id);
+    void deleteById(Long id);
     @Query
     List<Copies> getAvaliable(@Param("AVALIABLE") String avaliable);
 }

@@ -11,5 +11,6 @@ import java.util.List;
 @Transactional
 public interface MemberDao extends CrudRepository<Member, Integer> {
     List<Member> findAll();
+    void deleteById(Long id);
     List<Member> getMemberByLastName(String lastname);
 }

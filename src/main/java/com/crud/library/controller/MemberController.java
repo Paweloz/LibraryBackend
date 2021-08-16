@@ -44,7 +44,7 @@ public class MemberController {
     }
 
     @DeleteMapping(value = "deleteMember")
-    public void deleteMember(@RequestParam int memberId) {
+    public void deleteMember(@RequestParam Long memberId) {
         memberDbService.deleteMemeber(memberId);
     }
 }

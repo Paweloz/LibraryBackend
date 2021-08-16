@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "RENTED")
 public class Rented {
 
-    private int id;
+    private Long id;
     private Copies copy;
     private Member member;
     private LocalDate rented;
@@ -20,7 +20,7 @@ public class Rented {
 
     public Rented() {}
 
-    public Rented(int id, Copies copy, Member member, LocalDate rented) {
+    public Rented(Long id, Copies copy, Member member, LocalDate rented) {
         this.id = id;
         this.copy = copy;
         this.member = member;
@@ -31,7 +31,7 @@ public class Rented {
     @NotNull
     @GeneratedValue
     @Column(name = "ID", unique = true)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -57,7 +57,7 @@ public class Rented {
         return returned;
     }
 
-    private void setId(int id) {
+    private void setId(Long id) {
         this.id = id;
     }
 

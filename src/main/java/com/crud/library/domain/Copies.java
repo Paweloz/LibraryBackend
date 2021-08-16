@@ -12,13 +12,13 @@ import javax.validation.constraints.NotNull;
 @Table(name = "COPIES")
 public class Copies {
 
-    private int id;
+    private Long id;
     private Book book;
     private String status = "AVALIABLE";
 
     public Copies() {}
 
-    public Copies(int id, Book book, String status) {
+    public Copies(Long id, Book book, String status) {
         this.id = id;
         this.book = book;
         this.status = status;
@@ -27,8 +27,8 @@ public class Copies {
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "ID", unique = true)
-    public int getId() {
+    @Column(name = "COPY_ID", unique = true)
+    public Long getId() {
         return id;
     }
 
@@ -43,7 +43,7 @@ public class Copies {
         return status;
     }
 
-    private void setId(int id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
