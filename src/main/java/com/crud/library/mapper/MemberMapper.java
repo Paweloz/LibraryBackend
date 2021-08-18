@@ -2,20 +2,29 @@ package com.crud.library.mapper;
 
 import com.crud.library.domain.Member;
 import com.crud.library.domain.MemberDto;
+import com.crud.library.domain.Rented;
+import com.crud.library.repository.MemberDao;
+import com.crud.library.repository.RentedDao;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class MemberMapper {
+    private final RentedDao rentedDao;
 
     public MemberDto mapMemberToMemberDto(Member member) {
         return new MemberDto(
                 member.getId(),
                 member.getName(),
                 member.getLastName(),
-                member.getAccountCreationDate()
+                member.getAccountCreationDate(),
+                member.getRentedBooks().stream()
+                        .map(Rented::getId)
+                        .collect(Collectors.toList())
         );
     }
 
@@ -24,7 +33,10 @@ public class MemberMapper {
                 memberDto.getId(),
                 memberDto.getName(),
                 memberDto.getLastName(),
-                memberDto.getAccountCreationDate()
+                memberDto.getAccountCreationDate(),
+                memberDto.getRentedBooksId().stream()
+                        .map(rentedDao::findById)
+                        .collect(Collectors.toList())
         );
     }
 

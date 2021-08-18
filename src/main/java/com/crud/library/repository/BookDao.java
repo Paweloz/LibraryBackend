@@ -11,8 +11,10 @@ import java.util.List;
 @Transactional
 public interface BookDao extends CrudRepository<Book, Integer> {
     List<Book> findAll();
+    Book findById(Long id);
     List<Book> getBookByAuthor(String author);
     List<Book> getBookByTitle(String title);
+    Boolean existsById(Long id);
     void deleteById(Long id);
 
 

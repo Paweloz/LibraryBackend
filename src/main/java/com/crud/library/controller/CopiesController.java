@@ -10,6 +10,7 @@ import com.crud.library.service.CopiesDbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
 import java.util.List;
 
 @RestController
@@ -43,6 +44,11 @@ public class CopiesController {
     @GetMapping(value = "getAllCopies")
     public List<CopiesDto> getAllCopies() {
         return copiesMapper.mapToCopiesDtoList(copiesDbService.getAllCopies());
+    }
+
+    @GetMapping(value = "getCopiesAvaliableByBook")
+    public List<CopiesDto> getCopiesAvaliableByBook(@RequestParam Long bookId) {
+        return copiesMapper.mapToCopiesDtoList(copiesDbService.getCopiesAvaliableByBook(bookId));
     }
 
     @GetMapping(value = "getCopiesAvaliable")

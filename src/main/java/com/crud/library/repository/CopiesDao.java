@@ -16,8 +16,9 @@ import java.util.Optional;
 public interface CopiesDao extends CrudRepository<Copies, Integer> {
     List<Copies> findAll();
     List<Copies> findCopiesByBook(Book book);
-    Optional<Copies> findById(Long id);
+    Copies findById(Long id);
     void deleteById(Long id);
+    Boolean existsById(Long id);
     @Query
     List<Copies> getAvaliable(@Param("AVALIABLE") String avaliable);
 }

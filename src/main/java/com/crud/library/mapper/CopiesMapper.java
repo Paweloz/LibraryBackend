@@ -3,7 +3,6 @@ package com.crud.library.mapper;
 import com.crud.library.domain.Copies;
 import com.crud.library.domain.CopiesDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

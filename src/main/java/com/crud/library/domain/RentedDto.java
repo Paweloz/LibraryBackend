@@ -11,5 +11,5 @@ public class RentedDto {
     private Long id;
     private CopiesDto copyDto;
     private MemberDto memberDto;
-    private LocalDate rented;
+    private LocalDate rentedDate;
 }

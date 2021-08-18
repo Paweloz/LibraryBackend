@@ -23,7 +23,6 @@ public class BookMapper {
                 bookDto.getPublicationYear(),
                 bookDto.getCopiesDtoList().stream()
                         .map(copiesDao::findById)
-                        .map(copies -> copies.orElseThrow(()-> new RuntimeException("Copy not found")))
                         .collect(Collectors.toList())
         );
     }

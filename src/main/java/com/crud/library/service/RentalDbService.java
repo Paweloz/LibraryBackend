@@ -8,8 +8,8 @@ import com.crud.library.repository.RentedDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class RentalDbService {
     private static final String takenCopyStatus = "TAKEN";
 
 
-    public Optional<Rented> getRentedById(final Long rentId) {
+    public Rented getRentedById(final Long rentId) {
         return rentedDao.findById(rentId);
     }
 
@@ -38,10 +38,10 @@ public class RentalDbService {
         copiesDao.save(rentedCopy);
         return savedRented;
     }
-    public void deleteRental(final Long rentId) throws NoSuchRentalException {
-        Optional<Rented> optionalRented = getRentedById(rentId);
-        Rented rented = optionalRented.orElseThrow(NoSuchRentalException::new);
+    public void deleteRental(final Long rentId) {
+        Rented rented = getRentedById(rentId);
+        rented.setReturned(LocalDate.now());
         rented.getCopy().setStatus(avaliableCopyStatus);
-        rentedDao.deleteById(rentId);
+        rentedDao.save(rented);
     }
 }

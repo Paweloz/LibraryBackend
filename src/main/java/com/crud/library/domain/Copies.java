@@ -1,5 +1,10 @@
 package com.crud.library.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -10,48 +15,24 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "COPIES")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Copies {
-
-    private Long id;
-    private Book book;
-    private String status = "AVALIABLE";
-
-    public Copies() {}
-
-    public Copies(Long id, Book book, String status) {
-        this.id = id;
-        this.book = book;
-        this.status = status;
-    }
-
     @Id
     @NotNull
     @GeneratedValue
     @Column(name = "COPY_ID", unique = true)
-    public Long getId() {
-        return id;
-    }
-
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "TITLE_ID")
-    public Book getBook() {
-        return book;
-    }
-
+    private Book book;
     @Column(name = "STATUS")
-    public String getStatus() {
-        return status;
-    }
+    private String status = "AVALIABLE";
 
-    private void setId(Long id) {
-        this.id = id;
-    }
-
-    private void setBook(Book book) {
+    public Copies(Book book, String status) {
         this.book = book;
-    }
-
-    public void setStatus(String status) {
         this.status = status;
     }
 }

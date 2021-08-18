@@ -12,7 +12,7 @@ import java.util.Optional;
 @Transactional
 public interface RentedDao extends CrudRepository<Rented, Integer> {
     List<Rented> findAll();
-    Optional<Rented> findById(Long id);
+    Rented findById(Long id);
     void deleteById(Long id);
     List<Rented> findByMember_LastName(String lastname);
 }

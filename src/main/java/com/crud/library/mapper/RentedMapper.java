@@ -19,7 +19,7 @@ public class RentedMapper {
                 rented.getId(),
                 copiesMapper.mapCopiesToCopiesDto(rented.getCopy()),
                 memberMapper.mapMemberToMemberDto(rented.getMember()),
-                rented.getRented()
+                rented.getRentedDate()
         );
     }
 
@@ -28,7 +28,7 @@ public class RentedMapper {
                 rentedDto.getId(),
                 copiesMapper.mapCopiesDtoToCopies(rentedDto.getCopyDto()),
                 memberMapper.mapMemberDtoToMember(rentedDto.getMemberDto()),
-                rentedDto.getRented()
+                rentedDto.getRentedDate()
         );
     }
 

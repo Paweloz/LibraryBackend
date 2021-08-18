@@ -36,12 +36,8 @@ public class RentalController {
         return rentedMapper.mapToRentedDtoList(rentedList);
     }
 
-    @DeleteMapping(value = "returnBook")
+    @PutMapping(value = "returnBook")
     public void returnBook(@RequestParam Long rentId) {
-        try {
-            rentalDbService.deleteRental(rentId);
-        } catch (NoSuchRentalException e) {
-            System.out.println(e.getMessage());
-        }
+        rentalDbService.deleteRental(rentId);
     }
 }
