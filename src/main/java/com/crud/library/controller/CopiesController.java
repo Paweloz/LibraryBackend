@@ -4,13 +4,16 @@ import com.crud.library.domain.Book;
 import com.crud.library.domain.BookDto;
 import com.crud.library.domain.Copies;
 import com.crud.library.domain.CopiesDto;
+import com.crud.library.exception.BookNotFoundException;
+import com.crud.library.exception.CopyNotFoundException;
 import com.crud.library.mapper.BookMapper;
 import com.crud.library.mapper.CopiesMapper;
 import com.crud.library.service.CopiesDbService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import javax.swing.*;
 import java.util.List;
 
 @RestController
@@ -24,14 +27,25 @@ public class CopiesController {
     @PostMapping(value = "createCopy")
     public CopiesDto createCopy(@RequestBody CopiesDto copiesDto) {
         Copies copies = copiesMapper.mapCopiesDtoToCopies(copiesDto);
-        Copies savedCopy = copiesDbService.saveCopy(copies);
+        Copies savedCopy;
+        try {
+            savedCopy = copiesDbService.saveCopy(copies);
+        }catch (BookNotFoundException bnf) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, bnf.getMessage());
+        }
+
         return copiesMapper.mapCopiesToCopiesDto(savedCopy);
     }
 
     @PutMapping(value = "changeStatus")
     public CopiesDto changeCopyStatus(@RequestBody CopiesDto copiesDto) {
         Copies copies = copiesMapper.mapCopiesDtoToCopies(copiesDto);
-        Copies savedCopy = copiesDbService.saveCopy(copies);
+        Copies savedCopy;
+        try {
+            savedCopy = copiesDbService.saveCopy(copies);
+        }catch (BookNotFoundException bnf) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, bnf.getMessage());
+        }
         return copiesMapper.mapCopiesToCopiesDto(savedCopy);
     }
 
@@ -48,7 +62,13 @@ public class CopiesController {
 
     @GetMapping(value = "getCopiesAvaliableByBook")
     public List<CopiesDto> getCopiesAvaliableByBook(@RequestParam Long bookId) {
-        return copiesMapper.mapToCopiesDtoList(copiesDbService.getCopiesAvaliableByBook(bookId));
+        List<Copies> copiesList;
+        try {
+            copiesList = copiesDbService.getCopiesAvaliableByBook(bookId);
+        }catch ( BookNotFoundException bnf ) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, bnf.getMessage());
+        }
+        return copiesMapper.mapToCopiesDtoList(copiesList);
     }
 
     @GetMapping(value = "getCopiesAvaliable")
@@ -58,7 +78,11 @@ public class CopiesController {
 
     @DeleteMapping(value = "deleteCopy")
     public void deleteCopy(@RequestParam Long copyId) {
-        copiesDbService.deleteCopy(copyId);
+        try {
+            copiesDbService.deleteCopy(copyId);
+        }catch (CopyNotFoundException cnf) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, cnf.getMessage());
+        }
     }
 
 

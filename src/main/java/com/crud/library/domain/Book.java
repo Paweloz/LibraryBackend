@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "BOOK")
@@ -40,5 +41,18 @@ public class Book {
         this.author = author;
         this.publicationYear = publicationYear;
         this.copiesList = copiesList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return getPublicationYear() == book.getPublicationYear() && getId().equals(book.getId()) && getTitle().equals(book.getTitle()) && getAuthor().equals(book.getAuthor());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle(), getAuthor(), getPublicationYear());
     }
 }
