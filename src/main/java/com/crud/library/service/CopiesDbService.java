@@ -4,7 +4,6 @@ import com.crud.library.common.Validator;
 import com.crud.library.domain.Book;
 import com.crud.library.domain.Copies;
 import com.crud.library.exception.BookNotFoundException;
-import com.crud.library.exception.CopyNotFoundException;
 import com.crud.library.repository.BookDao;
 import com.crud.library.repository.CopiesDao;
 import lombok.RequiredArgsConstructor;

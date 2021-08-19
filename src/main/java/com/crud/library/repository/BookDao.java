@@ -16,6 +16,4 @@ public interface BookDao extends CrudRepository<Book, Integer> {
     List<Book> getBookByTitle(String title);
     Boolean existsById(Long id);
     void deleteById(Long id);
-
-
 }

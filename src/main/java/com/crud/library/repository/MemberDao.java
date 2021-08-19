@@ -9,9 +9,8 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface MemberDao extends CrudRepository<Member, Integer> {
+public interface MemberDao extends CrudRepository<Member, Long> {
     List<Member> findAll();
-    Member findById(Long id);
     void deleteById(Long id);
     List<Member> getMemberByLastName(String lastname);
 }
