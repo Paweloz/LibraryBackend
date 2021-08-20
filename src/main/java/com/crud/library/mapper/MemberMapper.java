@@ -1,9 +1,8 @@
 package com.crud.library.mapper;
 
 import com.crud.library.domain.Member;
-import com.crud.library.domain.MemberDto;
+import com.crud.library.domain.dto.MemberDto;
 import com.crud.library.domain.Rented;
-import com.crud.library.repository.MemberDao;
 import com.crud.library.repository.RentedDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

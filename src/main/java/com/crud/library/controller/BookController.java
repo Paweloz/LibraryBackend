@@ -1,7 +1,7 @@
 package com.crud.library.controller;
 
 import com.crud.library.domain.Book;
-import com.crud.library.domain.BookDto;
+import com.crud.library.domain.dto.BookDto;
 import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.mapper.BookMapper;
 import com.crud.library.service.BooksDbService;

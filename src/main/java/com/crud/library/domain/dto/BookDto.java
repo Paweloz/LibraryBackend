@@ -1,4 +1,4 @@
-package com.crud.library.domain;
+package com.crud.library.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

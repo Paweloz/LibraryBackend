@@ -1,7 +1,7 @@
 package com.crud.library.controller;
 
 import com.crud.library.domain.Member;
-import com.crud.library.domain.MemberDto;
+import com.crud.library.domain.dto.MemberDto;
 import com.crud.library.exception.MemberNotFoundException;
 import com.crud.library.mapper.MemberMapper;
 import com.crud.library.service.MemberDbService;

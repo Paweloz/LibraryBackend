@@ -1,7 +1,7 @@
 package com.crud.library.mapper;
 
 import com.crud.library.domain.Book;
-import com.crud.library.domain.BookDto;
+import com.crud.library.domain.dto.BookDto;
 import com.crud.library.domain.Copies;
 import com.crud.library.repository.CopiesDao;
 import lombok.RequiredArgsConstructor;

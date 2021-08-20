@@ -1,7 +1,7 @@
 package com.crud.library.mapper;
 
 import com.crud.library.domain.Copies;
-import com.crud.library.domain.CopiesDto;
+import com.crud.library.domain.dto.CopiesDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.crud.library.controller;
 
 import com.crud.library.domain.Rented;
-import com.crud.library.domain.RentedDto;
+import com.crud.library.domain.dto.RentedDto;
 import com.crud.library.exception.CopyNotFoundException;
 import com.crud.library.exception.MemberNotFoundException;
 import com.crud.library.exception.RentalNotFoundException;

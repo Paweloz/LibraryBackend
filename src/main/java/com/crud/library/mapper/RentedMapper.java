@@ -1,7 +1,7 @@
 package com.crud.library.mapper;
 
 import com.crud.library.domain.Rented;
-import com.crud.library.domain.RentedDto;
+import com.crud.library.domain.dto.RentedDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

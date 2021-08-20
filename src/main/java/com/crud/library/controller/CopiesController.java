@@ -1,9 +1,9 @@
 package com.crud.library.controller;
 
 import com.crud.library.domain.Book;
-import com.crud.library.domain.BookDto;
+import com.crud.library.domain.dto.BookDto;
 import com.crud.library.domain.Copies;
-import com.crud.library.domain.CopiesDto;
+import com.crud.library.domain.dto.CopiesDto;
 import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.exception.CopyNotFoundException;
 import com.crud.library.mapper.BookMapper;

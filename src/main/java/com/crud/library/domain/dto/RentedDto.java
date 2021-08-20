@@ -1,5 +1,7 @@
-package com.crud.library.domain;
+package com.crud.library.domain.dto;
 
+import com.crud.library.domain.dto.CopiesDto;
+import com.crud.library.domain.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
